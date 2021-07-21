@@ -20,6 +20,14 @@
         Next page
       </router-link>
     </div>
+    <select id="checkPage" v-model.number="checkPage" >
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+      <option>6</option>
+    </select>
   </div>
 </template>
 
@@ -43,12 +51,13 @@ export default {
   data() {
     return {
       events: null,
-      totalEvents: 0 // <-- Added this to store totalEvent
+      totalEvents: 0, // <-- Added this to store totalEvent
+      checkPage: 1
     }
   },
   created() {
     watchEffect(() => {
-      EventService.getEvents(3, this.page)
+      EventService.getEvents(this.checkPage, this.page)
         .then((response) => {
           this.events = response.data
           this.totalEvents = response.headers['x-total-count']
@@ -61,7 +70,7 @@ export default {
   computed: {
     hasNextPage() {
       //fisrt , calulate total page
-      let totalPages = Math.ceil(this.totalEvents / 3) // 2is event per page
+      let totalPages = Math.ceil(this.totalEvents / this.checkPage) // 2is event per page
       //Then Check to see if the current page is less then total pages
       return this.page < totalPages
     }
