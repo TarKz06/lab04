@@ -5,11 +5,11 @@
       <router-link :to="{ name: 'EventDetails', params: { id } }"
         >Details</router-link
       >
-|
+      |
       <router-link :to="{ name: 'EventRegister', params: { id } }"
         >Register</router-link
       >
-|
+      |
       <router-link :to="{ name: 'EventEdit', params: { id } }"
         >Edit
       </router-link>
@@ -33,8 +33,14 @@ export default {
         this.event = response.data
       })
       .catch((error) => {
-        console.log(error)
-        this.$router.push({name: '404Resource' , params:{resource:'event'}})
+        if (error.response && error.response.this.status == 404) {
+          this.$router.push({
+            name: '404Resource',
+            params: { resource: 'event' }
+          })
+        } else {
+          this.$router.push({ name: 'NetworkError' })
+        }
       })
   }
 }

@@ -6,6 +6,7 @@ import EventRegister from '../views/event/Register.vue'
 import EventEdit from '../views/event/Edit.vue'
 import EventLayout from '../views/event/Layout.vue'
 import NotFound from '../views/event/NotFound.vue'
+import NetworkError from '../views/NetworkError.vue'
 
 
 const routes = [
@@ -56,6 +57,11 @@ const routes = [
       path: '/:catchAll(.*)',
       name: 'NotFound',
       component: NotFound
+  },
+  {
+    path: '/network-error',
+    name: 'NetworkError',
+    component: NetworkError
   }
 ]
 
