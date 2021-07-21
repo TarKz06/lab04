@@ -12,6 +12,12 @@ import EventService from '@/services/EventService.js'
 // import axios from 'axios'
 export default {
   name: 'EventList',
+  props: {
+    page: {
+      type: Number,
+      required: true
+    }
+  },
   components: {
     EventCard // register it as a child component
   },
@@ -21,7 +27,7 @@ export default {
     }
   },
   created() {
-    EventService.getEvents()
+    EventService.getEvents(2,this.page)
       .then((response) => {
         this.events = response.data
       })
