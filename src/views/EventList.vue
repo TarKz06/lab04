@@ -48,7 +48,7 @@ export default {
   },
   created() {
     watchEffect(() => {
-      EventService.getEvents(2, this.page)
+      EventService.getEvents(3, this.page)
         .then((response) => {
           this.events = response.data
           this.totalEvents = response.headers['x-total-count']
@@ -61,7 +61,7 @@ export default {
   computed: {
     hasNextPage() {
       //fisrt , calulate total page
-      let totalPages = Math.ceil(this.totalEvents / 2) // 2is event per page
+      let totalPages = Math.ceil(this.totalEvents / 3) // 2is event per page
       //Then Check to see if the current page is less then total pages
       return this.page < totalPages
     }
